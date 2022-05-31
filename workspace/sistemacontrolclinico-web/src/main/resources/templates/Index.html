@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<div th:replace="layout/layout :: menu"></div>
+	<div class="contenedor">
+	<div class="header"><p></p></div>
+		<div class="container" style="min-height: 100vh;">
+			<div class="row" sec:authorize="isAuthenticated()">
+				
+				<h1 style="text-align: center">¡Bienvenido <span sec:authentication="name"></span> !</h1>
+				<h1 style="text-align: center" id="HoraActual"> </h1>
+					
+				<div class="img">
+					<img alt="Medicina" th:src="@{img/medicina.png}">
+				
+				</div>
+			
+			
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	showTime();
+	function showTime(){
+	myDate = new Date();
+	hours = myDate.getHours();
+	minutes = myDate.getMinutes();
+	seconds = myDate.getSeconds();
+	if (hours < 10) hours = 0 + hours;
+
+	if (minutes < 10) minutes = "0" + minutes;
+
+	if (seconds < 10) seconds = "0" + seconds;
+
+	$("#HoraActual").text(hours+ ":" +minutes+ ":" +seconds);
+	setTimeout("showTime()", 1000);
+	}
+	</script>
+</body>
+</html>

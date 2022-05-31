@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+
+	<div>
+
+		<div class="container">
+			<div class="row">
+				<div class="img">
+					<img alt="Advertencia" th:src="@{img/peligro.png}">
+				
+				</div>
+				<h5>
+					Los sentimos <span th:text="${#authentication.name}"></span>,
+					NO tienes permiso para acceder a este recurso.
+				</h5>
+				<a class="waves-effect blue lighten-1 btn" th:href="@{/}"  role="button">Ir al inicio</a>
+			</div>
+		</div>
+	</div>
+
+	
+</body>
+</html>

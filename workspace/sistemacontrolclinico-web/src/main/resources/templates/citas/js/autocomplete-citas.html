@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	
+	<script type="text/javascript" th:fragment="javascript">
+	
+	$(document).ready(function() {
+
+		$("#buscar_cita").autocomplete({
+
+			source : function(request, response) {
+				$.ajax({
+					url : "/cargar-citas/" + request.term,
+					dataType : "json",
+					data : {
+						term : request.term
+					},
+					success : function(data) {
+						response($.map(data, function(item) {
+							return {
+								value : item.id,
+								label : item.nombre,
+								telefono : item.telefono,
+								fecha : item.fecha,
+								hora : item.hora
+							};
+						}));
+					},
+				});
+			},
+			select : function(event, ui) {
+				$("#buscar_cita").val(ui.item.label);
+
+				return false;
+			}
+		});
+	
+		$("#buscar_cita").on("keyup", function() {
+			    var value = $(this).val().toLowerCase();
+			    $("#table_citas tr").filter(function() {
+			      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			    });
+			  });
+		
+		$("#cita_fecha").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#table_citas tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+			
+
+	});
+	
+	</script>
+
+</body>
+</html>

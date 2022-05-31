@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+		<ul class="pagination" th:fragment="paginator">
+			<li  class="waves-effect">
+			<span th:if="${page.first}">Primera</span>
+			<a th:if="${not page.first}" th:href="@{${page.url}(page=0)}">Primera</a>
+			</li>
+			<li  class="waves-effect">
+				<span th:if="${not page.hasPrevious}"><i class="material-icons">chevron_left</i></span>
+				<a th:if="${page.hasPrevious}" th:href="@{${page.url}(page=${page.paginaActual-2})}"><i class="material-icons">chevron_left</i></a>
+			</li>
+			<li  class="waves-effect"  th:each="item : ${page.paginas}">
+				<span th:if="${item.actual}" th:text="${item.numero}" ></span>
+				<a th:if="${not item.actual}" th:href="@{${page.url}(page=${item.numero-1})}" th:text="${item.numero}"> </a>
+			</li>
+			<li  class="waves-effect">
+				<span th:if="${not page.hasNext}"><i class="material-icons">chevron_right</i></span>
+				<a th:if="${page.hasNext}" th:href="@{${page.url}(page=${page.paginaActual})}"><i class="material-icons">chevron_right</i></a>
+			</li>
+			<li  class="waves-effect">
+				<span th:if="${page.last}">Ultima</span>
+				<a th:if="${not page.last}" th:href="@{${page.url}(page=${page.totalPaginas-1})}">Ultima</a>
+			</li>
+		</ul>
+	
+	
+</body>
+</html>

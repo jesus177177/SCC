@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<div th:replace="layout/layout :: menu"></div>
+	<div class="contenedor">
+		<div class="header">
+			<h4 class="center_align">Nueva Historia</h4>
+		</div>
+
+		<div class="container" style="min-height: 100vh;">
+			<div class="row">
+			<br/>
+			<br/>
+				<form class="col s12" th:action="@{/nuevaHistoria}"
+					th:object="${historia}" method="post">
+					<input type="hidden" th:field="*{paciente}" />
+					<div class="row">
+						<div class="input-field col s12">
+							<textarea id="consulta" class="materialize-textarea"
+								th:field="*{consulta}"></textarea>
+							<label for="consulta">Seguimiento</label>
+						</div>
+					</div>
+
+					<div class="input-fiel col s12 center-align">
+						<button class="waves-effect blue lighten-1 btn" type="submit" />
+						Guardar
+						</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+

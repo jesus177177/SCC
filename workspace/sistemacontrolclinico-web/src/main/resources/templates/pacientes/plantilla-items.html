@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<table th:fragment="itemsPacientes">
+
+		<tbody id="plantillaItemsPacientes">
+			<tr id="row_{ID}">
+				<td>{NOMBRE}</td>
+				<td>{EDAD}</td>
+				<td>
+				<a 
+					class="waves-effect blue btn"> <i class="material-icons">border_color</i>
+				</a>
+				</td>
+				<td><a
+					class="waves-effect red darken-4 btn"> <i
+						class="material-icons">delete</i>
+				</a></td>
+			</tr>
+		</tbody>
+
+	</table>
+
+</body>
+</html>

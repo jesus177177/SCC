@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<div th:replace="layout/layout :: menu"></div>
+	<div class="contenedor">
+		<div class="header">
+			<h4 class="center_align">Citas</h4>
+		</div>
+		<div class="container" style="min-height: 100vh;">
+			<div class="row">
+			<form class="col s12">
+ 		       <div class="input-field col s8">
+          			<input  id="buscar_cita" type="text" name="buscar_cita">
+          			<label for="buscar_cita">Buscar Cita</label>
+        		</div>
+        		
+        		<div class="input-field col s4">
+          			<input  id="cita_fecha" type="date" name="cita_fecha">
+        		</div>
+        	</form>
+			<br/>
+				<table class="z-depth-4">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Telefono</th>
+							<th>Fecha</th>
+							<th>Hora</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody id="table_citas">
+						<tr th:each="cita: ${citas}">
+							<td th:text="${cita.nombre}"></td>
+							<td th:text="${cita.telefono}"></td>
+							<td th:text="${cita.fecha}"></td>
+							<td th:text="${cita.hora}"></td>
+							<td>
+								<a th:href="@{/form/} + ${cita.id}" class="waves-effect blue btn"> <i class="material-icons">border_color</i> </a>
+							</td>
+							<td>
+								<a onclick="return confirm('Estas seguro que quieres eliminar?');" th:href="@{/eliminar/} + ${cita.id}" class="waves-effect red darken-4 btn"> <i class="material-icons">delete</i> </a> 
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<!--  <ul class="pagination" th:replace="paginator-nav :: paginator"></ul>-->
+				
+				<div class="col s12 right-align">
+					<a th:href="@{/form}" class="waves-effect blue lighten-1 btn">Nueva cita</a>
+				</div>
+				<br>
+
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="citas/js/autocomplete-citas :: javascript"></script>
+</body>
+</html>

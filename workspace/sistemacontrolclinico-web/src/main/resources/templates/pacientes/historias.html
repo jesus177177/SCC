@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<div th:replace="layout/layout :: menu"></div>
+	<div class="contenedor">
+		<div class="header">
+			<h4 th:text="${paciente.nombre} + ${paciente.apellidos}"></h4>
+		</div>
+
+		<div class="container" style="min-height: 100vh;">
+			<div class="row">
+			<br/>
+			<div style="margin-bottom: 1rem" class="col s12 right-align">
+					<a th:href="@{/nuevaHistoria/} + ${id}"
+					class="waves-effect blue lighten-1 btn">Nueva Historia</a>
+			</div>
+			<br/>
+			<br/>
+				<table class="z-depth-1">
+					<thead>
+						<tr>
+							<th>Seguimiento</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="historia: ${historias}">
+							<td><a th:text="${historia.creacion}"
+								class="waves-effect blue lighten-1 btn"
+								th:href="@{/ver/} + ${historia.id}"></a></td>
+							
+							<td><a
+							class="waves-effect red darken-4 btn"
+								th:href="@{/eliminarhistoria/} + ${historia.id}" onclick="return confirm('Estas seguro que quieres eliminar?');">
+								<i class="material-icons">delete</i>
+								</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

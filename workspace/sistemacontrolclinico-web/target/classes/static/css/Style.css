@@ -1,0 +1,85 @@
+:root{
+	--color-barra: #009DAE;
+}
+
+.barra-lateral {
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15rem;
+    height: 100vh;
+}
+
+.perfil {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.perfil img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.navegacion {
+    background-color: var(--color-barra);
+    min-height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+.navegacion a {
+    width: 100%;
+    color: white;
+    padding: 1rem;
+}
+
+
+.navegacion a:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    width: 15rem;
+    background-color: white;
+    color: var(--color-barra);
+}
+
+
+
+.contenedor {
+    margin: 0 0 0 15rem;
+    min-height: 100vh;
+}
+
+
+.header {
+    background-color: var(--color-barra);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 15px;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+}
+.header i {
+    font-size: 2rem;
+}
+.header span {
+    text-align: center;
+    display: block;
+}
+
+.img {
+	display:flex;
+	justify-content: center;
+}
+
+
+.img img {
+	width: 400px;
+	height: 400px
+}
+
+
+
+

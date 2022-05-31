@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+
+	<div th:replace="layout/layout :: menu"></div>
+	<div class="contenedor">
+		<div class="header">
+			<h4 class="center_align">Detalle Cuenta</h4>
+		</div>
+		<div class="container" style="min-height: 100vh;">
+			<div class="row">
+				<br/>
+				<br/>			
+				<form class="col s12" th:action="@{/saveUsuario}"
+					th:object="${usuario}" method="post">
+					<div class="row">
+						<input type="hidden" th:field="*{id}">
+						<div class="input-field col s6">
+							<input disabled  id="nombre" type="text" th:field="*{nombre}"
+								class="validate"> <label for="nombre">Nombre(s)</label>
+						</div>
+						<div class="input-field col s6">
+							<input disabled id="apellidos" type="text" class="validate" th:field="*{apellidos}"> <label
+								for="apellidos">Apellidos</label>
+						</div>
+						<div class="input-field col s6">
+							<input disabled id="username"  type="text" class="validate" th:field="*{username}">
+							<label for="username">Username</label>
+						</div>
+						<div class="input-field col s12">
+							<input disabled id="email" type="text" class="validate" th:field="*{email}"> <label
+								for="email">Correo electronico</label>
+						</div>
+					
+					</div>
+				</form>
+			
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

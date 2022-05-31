@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<div>
+		<div class="header">
+			<h5
+				th:text="${historia.paciente.nombre} + ${historia.paciente.apellidos}"></h5>
+		</div>
+
+		<div class="container" style="min-height: 100vh;">
+			<div class="row">
+				<div class="input-field col s4">
+					<input disabled  type="text" th:value="${historia.paciente.peso} + kg" class="validate">
+					<span class="helper-text">Peso</span>
+				</div>
+				<div class="input-field col s4">
+					<input disabled  type="text" th:value="${historia.paciente.altura} + cm" class="validate">
+					<span class="helper-text">Altura</span>
+				</div>
+				<div class="input-field col s4">
+					<input disabled  type="text" th:value="${historia.paciente.imc}" class="validate">
+					<span class="helper-text">IMC</span>
+				</div>
+
+				<!-- Inicio de la card -->
+				<div class="col s12">
+					<div class="card col s12">
+						<div class="card-content blue-text text-darken-2">
+							<span class="card-title">Seguimiento</span>
+							<p style="text-align: justify" th:text="${historia.consulta}">
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Fin de la card -->
+				
+				<div class="col s12">
+				
+				<a th:href="@{/pacientes}" class="waves-effect light-blue darken-1 btn"><i class="material-icons left">arrow_back</i>Regresar</a>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

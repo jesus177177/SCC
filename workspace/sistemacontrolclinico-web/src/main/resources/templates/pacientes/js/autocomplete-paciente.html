@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	
+	<script type="text/javascript" th:fragment="jspaciente">
+	
+	$(document).ready(function() {
+
+		$("#buscar_paciente").autocomplete({
+
+			source : function(request, response) {
+				$.ajax({
+					url : "/cargar-pacientes/" + request.term,
+					dataType : "json",
+					data : {
+						term : request.term
+					},
+					success : function(data) {
+						response($.map(data, function(item) {
+							return {
+								value : item.id,
+								label : item.nombre + item.apellidos,
+								direccion : item.direccion,
+								peso : item.peso,
+								altura : item.altura,
+								fecha : item.fecha,
+								edad : item.edad,
+								talla : item.talla,
+								imc : item.imc
+							};
+						}));
+					},
+				});
+			},
+			select : function(event, ui) {
+				$("#buscar_paciente").val(ui.item.label);
+				
+				
+
+				return false;
+			}
+		});
+		$("#buscar_paciente").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#table_paciente tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+	
+	
+	
+		
+
+	});
+	
+	</script>
+	
+	
+	
+</body>
+</html>

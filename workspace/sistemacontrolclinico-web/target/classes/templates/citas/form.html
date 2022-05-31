@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<div th:replace="layout/layout :: menu"></div>
+	<div class="contenedor">
+		<div class="header">
+			<h4 th:if="${cita.id < 1}" class="center_align">Nueva Cita</h4>
+			<h4 th:if="${cita.id > 1}" class="center_align">Actualizar Cita</h4>
+		</div>
+		<div class="container" style="min-height: 100vh;">
+			<br> 
+			<br>
+			<form class="col s12" th:action="@{/form}" th:object="${cita}" method="post">
+				<div class="row">
+					<!--  <input type="hidden" th:field="*{id}" />  -->
+					<div class="input-field col s6">
+						<input id="nombre" type="text" class="validate" required th:field="*{nombre}" />
+						<label for="nombre">Nombre Completo</label>
+					</div>
+					<div class="input-field col s6">
+						<input maxlength="10" id="telefono" type="text" required th:field="*{telefono}" />
+						<label for="telefono">Telefono</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="date"  name="fecha" required  pattern="dd-MM-yyyy" th:field="*{fecha}" />
+					</div>
+					<div class="input-field col s6">
+						<input id="hora" type="text" required  th:field="*{hora}" />
+						<label for="hora">Hora</label>
+					</div>
+					<br>
+					<div class="input-fiel col s12 center-align">
+						<button class="waves-effect blue lighten-1 btn" type="submit">Guardar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+</body>
+</html>

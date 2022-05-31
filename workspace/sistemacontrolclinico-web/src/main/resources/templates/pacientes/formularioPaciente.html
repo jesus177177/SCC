@@ -1,0 +1,111 @@
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<div th:replace="layout/layout :: menu"></div>
+	<div class="contenedor">
+		<div class="header">
+			<h4 th:if="${pacienteDto.id > 0}" class="center_align">Actualizar
+				Paciente</h4>
+			<h4 th:if="${pacienteDto.id < 1}" class="center_align">Nuevo
+				Paciente</h4>
+		</div>
+		<div class="container" style="min-height: 100vh;">
+			<div class="row">
+				<br />
+				<form class="col s12" th:action="@{/guardarPaciente}"
+					th:object="${pacienteDto}" method="post">
+					<div class="row">
+						<div class="input-field col s6">
+							<input id="nombre" type="text" class="validate" required
+								th:field="*{nombre}"> <label for="nombre">Nombre(s)</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="apellidos" type="text" class="validate" required
+								th:field="*{apellidos}"> <label for="apellidos">Apellido(s)</label>
+						</div>
+						<div class="input-field col s12">
+							<input id="direccion" type="text" class="validate" required
+								th:field="*{direccion}"> <label for="direccion">Direccion</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="peso" type="number" required min="1"  step="0.1"
+								th:field="*{peso}"> <label for="peso">Peso</label>
+								<span class="helper-text">kg</span>
+						</div>
+						<div class="input-field col s6">
+							<input id="altura" type="number" required min="1"  step="0.1"
+								th:field="*{altura}"> <label for="altura">Altura</label>
+								<span class="helper-text">cm</span>
+						</div>
+						<div class="input-field col s6">
+							<input id="fecha" type="date" class="validate" required
+								th:field="*{fecha}"> <label for="fecha">Fecha de nacimiento </label>
+						</div>
+						<div class="input-field col s6">
+							<input id="edad" type="text" class="validate"  required th:field="*{edad}">
+							<span class="helper-text">Edad</span>
+						</div>
+						<div class="input-field col s6">
+							<input id="talla" type="number" required min="1" step="0.1"
+								th:field="*{talla}"> <label for="talla">Talla</label>
+						</div>
+						<div th:if="${id != null}" class="input-field col s6">
+							<input id="imc" type="text" class="validate" th:field="*{imc}">
+							<label for="imc">Imc</label>
+						</div>
+						<div th:if="${pacienteDto.id < 1}" class="input-field col s12">	
+							<span class="helper-text">Seguimiento</span>					
+							<textarea class="materialize-textarea" id="consulta" rows="20" cols="90" required th:field="*{consulta}">
+							
+							</textarea>
+							
+						</div>
+						<br />
+						<div style="margin-top: 1rem" class="input-fiel col s12 center-align">
+							<button class="waves-effect blue lighten-1 btn" type="submit" />
+							Guardar
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	const fechaNacimiento = document.getElementById("fecha");
+	
+	const edad = fechaNac => {
+	  if(!fechaNac || isNaN(new Date(fechaNac))) return;
+	  const hoy = new Date();
+	  const dateNac = new Date(fechaNac);
+	  if(hoy - dateNac < 0) return;
+	  let dias = hoy.getUTCDate() - dateNac.getUTCDate();
+	  let meses = hoy.getUTCMonth() - dateNac.getUTCMonth();
+	  let years = hoy.getUTCFullYear() - dateNac.getUTCFullYear();
+	  if(dias < 0) {
+	    meses--;
+	    dias = 30 + dias;
+	  }
+	  if(meses < 0) {
+	    years--;
+	    meses = 12 + meses;
+	  }
+	  
+	  return [years, meses, dias];
+	}
+
+	$('#fecha').change(e => {
+	  
+	  let suEdad = edad(e.currentTarget.value);
+	  
+	  if(suEdad) {
+	    $('#edad').val(`${suEdad[0]} año(s), ${suEdad[1]} mes(es) y ${suEdad[2]} día(s).`);
+	  } else {
+	    $('#edad').val('');
+	  }
+	});
+	</script>
+</body>
+</html>

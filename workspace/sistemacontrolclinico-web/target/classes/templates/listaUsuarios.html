@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<div th:replace="layout/layout :: menu"></div>
+	<div class="contenedor">
+
+		<div class="header">
+			<h4>Usuarios</h4>
+		</div>
+		<div class="container" style="min-height: 100vh;">
+			<div class="row">
+			<br/><br/>
+			
+			<table class="z-depth-4">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Correo</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuario : ${usuarios}">
+							<td th:text="${usuario.nombre}+ ' ' + ${usuario.apellidos}"></td>
+							<td th:text="${usuario.email}"></td>
+							
+							<td>
+							<a th:href="@{/edituser/} + ${usuario.id}" class="waves-effect blue btn"> 
+								<i class="material-icons">border_color</i>
+							</a> 
+							</td>
+							<td>
+							<a th:href="@{/deleteuser/} + ${usuario.id}" class="waves-effect red darken-4 btn"> 
+							<i class="material-icons">delete</i> </a> 
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br/>
+				
+				<div class="col s12 right-align">
+					<a th:href="@{/nuevoUsuario}" class="waves-effect blue lighten-1 btn">Nuevo Usuario</a>
+				</div>
+			
+			
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>
