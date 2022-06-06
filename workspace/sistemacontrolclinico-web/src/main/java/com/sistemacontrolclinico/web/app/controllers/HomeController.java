@@ -30,7 +30,7 @@ public class HomeController {
 	@Autowired
 	private ICitaService citaServicio;
 
-	@Secured("ROLE_USER")
+	
 	@GetMapping({"/index","/home"})
 	public String index(Model model, Authentication authentication, HttpServletRequest request) {
 		//3 formas de obtener el acceso de los roles.

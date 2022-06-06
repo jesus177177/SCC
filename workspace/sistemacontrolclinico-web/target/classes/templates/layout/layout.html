@@ -37,6 +37,13 @@
 				<span>Pacientes</span>
 			</a> <a th:href="@{/citas}"> <i class="material-icons">event</i> <span>Agenda</span>
 			</a> 
+			<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/biblioteca}"> <i class="material-icons">book</i>
+				<span>Biblioteca</span>
+			</a> 
+			<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/listaUsuarios}"> <i class="material-icons">people</i>
+				<span>Usuarios</span>
+			</a> 
+		
 			
 			<a th:href="@{/configuracion}"> <i class="material-icons">assignment</i> <span>Detalle Cuenta</span></a> 
 			

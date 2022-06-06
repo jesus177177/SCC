@@ -13,32 +13,32 @@
 			<div class="row">
 
 				<form class="col s12" th:action="@{/saveUsuario}"
-					th:object="${usuarioDto}" method="post">
+					th:object="${usuarios}" method="post">
 					<div class="row">
 						<div class="input-field col s6">
 							<input  id="nombre" type="text" th:field="*{nombre}"
-								class="validate"> <label for="nombre">Nombre(s)</label>
+								class="validate" required> <label for="nombre" required>Nombre(s)</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="apellidos" type="text" class="validate" th:field="*{apellidos}"> <label
+							<input id="apellidos" type="text" class="validate" required th:field="*{apellidos}"> <label
 								for="apellidos">Apellidos</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="username" type="text" class="validate" th:field="*{username}"> <label
+							<input id="username" type="text" class="validate" required th:field="*{username}"> <label
 								for="username">Usuario</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="email" type="text" class="validate" th:field="*{email}"> <label
+							<input id="email" type="text" class="validate" required th:field="*{email}"> <label
 								for="email">Correo electronico</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="password" type="password" class="validate" th:field="*{password}"> <label
+							<input id="password" type="password" class="validate" required th:field="*{password}"> <label
 								for="password">Contraseña</label>
 						</div>
 						
 						<div class="input-field col s6">
-							<input id="authority" type="text" class="validate" th:field="*{authority}"> <label
-								for="authority">Permiso </label>
+							<input id="rol" type="text" class="validate" required th:field="*{Rol}"> <label
+								for="rol">Permiso </label>
 						</div>
 					
 						<div class="input-fiel col s12 center-align">

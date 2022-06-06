@@ -41,12 +41,12 @@ public class JpaUserDetailService implements UserDetailsService{
         
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         
-        for(Role role: usuario.getRoles()) {
-        	logger.info("Role: ".concat(role.getAuthority()));
-        	authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
-        }
+        //for(Role role: usuario.getRoles()) {
+        //	logger.info("Role: ".concat(role.getAuthority()));
+       // 	authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
+        //}
         
-        if(authorities.isEmpty()) {
+        if(usuario.getRol() == null) {
         	logger.error("Error en el Login: Usuario '" + username + "' no tiene roles asignados!");
         	throw new UsernameNotFoundException("Error en el Login: usuario '" + username + "' no tiene roles asignados!");
         }

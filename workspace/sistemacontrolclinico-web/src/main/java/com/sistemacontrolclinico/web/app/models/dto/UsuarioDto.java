@@ -15,6 +15,20 @@ public class UsuarioDto {
 	private String password;
 	
 	private String authority;
+	
+	private String consulta;
+	
+	private String rol;
+	
+	
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
 
 	public Long getId() {
 		return id;
@@ -71,6 +85,16 @@ public class UsuarioDto {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
+
+	public String getConsulta() {
+		return consulta;
+	}
+
+	public void setConsulta(String consulta) {
+		this.consulta = consulta;
+	}
+	
+	
 	
 	
 	

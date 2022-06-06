@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;sistemacontrolclinico-web/src/main/resources/templates/Index.html&apos; to &apos;index.html&apos;" description="Rename resource &apos;Index.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/Index.html" name="index.html" stamp="1654237311652" updateReferences="true"/>
+</session>

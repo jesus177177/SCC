@@ -1,0 +1,10 @@
+package com.sistemacontrolclinico.web.app.controllers;
+
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Controller;
+
+@Secured("ROLE_ADMIN")
+@Controller
+public class RoleController {
+
+}

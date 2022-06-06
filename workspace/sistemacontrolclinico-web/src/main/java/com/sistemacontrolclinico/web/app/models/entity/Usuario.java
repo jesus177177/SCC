@@ -34,6 +34,18 @@ public class Usuario implements Serializable{
 	private String password;
 	
 	private Boolean enabled;
+	
+	private String Rol;
+	
+	
+
+	public String getRol() {
+		return Rol;
+	}
+
+	public void setRol(String rol) {
+		Rol = rol;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
@@ -102,6 +114,10 @@ public class Usuario implements Serializable{
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public void agregarRole(Role role) {
+		this.roles.add(role);
 	}
 	
 	/**

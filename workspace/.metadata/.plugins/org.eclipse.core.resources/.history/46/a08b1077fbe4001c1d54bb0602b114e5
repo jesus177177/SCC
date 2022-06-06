@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<title>Sistema Control Clinico</title>
+<link
+	th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/Style.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.min.css}">
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+
+<!-- Compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+	<div th:fragment="menu" class="barra-lateral">
+		<div sec:authorize="isAuthenticated()" class="perfil">
+			<img th:src="@{/img/doctor.png}" alt="img">
+			<p sec:authorize="isAuthenticated()">
+				<span sec:authentication="name"></span>
+			</p>
+		</div>
+		<div class="navegacion">
+			<a th:href="@{/home}"> 
+			<i class="material-icons">home</i> <span>Inicio</span>
+			</a> 
+			<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/pacientes}"> <i class="material-icons">people</i>
+				<span>Pacientes</span>
+			</a> <a th:href="@{/citas}"> <i class="material-icons">event</i> <span>Agenda</span>
+			</a> 
+			<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/biblioteca}"> <i class="material-icons">book</i>
+				<span>Biblioteca</span>
+			</a> 
+			<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/users}"> <i class="material-icons">AccountBox</i>
+				<span>Usuarios</span>
+			</a> 
+		
+			
+			<a th:href="@{/configuracion}"> <i class="material-icons">assignment</i> <span>Detalle Cuenta</span></a> 
+			
+			<a th:href="@{/help}"> <i class="material-icons">help</i> <span>Ayuda</span>
+			</a>
+
+			<form id="logoutForm" th:action="@{/logout}" method="post">
+				<a style="cursor:pointer" onclick="document.getElementById('logoutForm').submit();"
+					type="submit"><i class="material-icons">close</i> Cerrar Sesion</a>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" />
+			</form>
+		</div>
+	</div>
+
+	<div class="contenedor">
+		<div th:fragment="header" class="header">
+			<div>
+				<i class="material-icons">event</i> <span th:text="${numerocitas}">3</span>
+			</div>
+			<div>
+				<i class="material-icons"></i> <span>3</span>
+			</div>
+			<div>
+				<i class="material-icons"></i> <span>3</span>
+			</div>
+		</div>
+
+		<div class="container" style="min-height: 100vh;">
+			<div class="row"></div>
+		</div>
+	</div>
+
+	<footer th:fragment="footer">
+		<script th:src="@{/js/jquery-ui.min.js}"></script>
+		<script th:src="@{https://unpkg.com/sweetalert/dist/sweetalert.min.js}"></script>
+	</footer>
+</body>
+</html>

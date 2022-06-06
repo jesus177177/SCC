@@ -5,59 +5,64 @@ import java.util.List;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
-
 import com.sistemacontrolclinico.web.app.models.dao.IUsuarioDao;
 import com.sistemacontrolclinico.web.app.models.dto.UsuarioDto;
 import com.sistemacontrolclinico.web.app.models.entity.Role;
 import com.sistemacontrolclinico.web.app.models.entity.Usuario;
+import com.sistemacontrolclinico.web.app.models.service.IRoleService;
 import com.sistemacontrolclinico.web.app.models.service.IUsuarioService;
-import com.sistemacontrolclinico.web.app.models.service.JpaUserDetailService;
+
 
 
 @Controller
 public class UsuarioController {
 	
-	protected final Log logger = LogFactory.getLog(this.getClass());
+	
 	@Autowired
-	private JpaUserDetailService jpaUserDetailService;
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private IUsuarioService servicio;
+	
+	@Autowired
+	private IRoleService servicioo;
+	
+	@Secured("ROLE_ADMIN")
+	@PostMapping("/saveRole")
+	public void roleGuardar(Role role) {
+		System.out.println("RoleController >> "+role.getAuthority());
+		servicioo.save(role);
+	}
+	
 	@Autowired
 	private IUsuarioDao servicioDao;
 	
 	@Secured("ROLE_ADMIN")
-	@GetMapping("/usuarios")
+	@GetMapping("/listaUsuarios")
 	public String listaUsuario(Model model, Authentication authentication){
-		if(authentication!=null) {
-			logger.info("Hola usuario autenticado, tu username es: ".concat(authentication.getName()));
-		}
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-		if(auth != null) {
-			logger.info("Utilizando forma estática SecurityContextHolder.getContext().getAuthentication(): Usuario autenticado: ".concat(auth.getName()));
-		}
-		
 		List<Usuario> usarios = servicio.findAll();
 		model.addAttribute("usuarios", usarios);
 		return "listaUsuarios";
 	}
 	
-	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/formularioUsuario")
+	public String formularioUsuario(Model model, Authentication authentication){
+		UsuarioDto usuarioDto = new UsuarioDto();
+		model.addAttribute("usuarios", usuarioDto);
+		return "usuario/formularioUsuario";
+	}
 	
 	
 	@Secured("ROLE_USER")
@@ -71,8 +76,24 @@ public class UsuarioController {
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/saveUsuario")
 	public String configuracionGuardar(Usuario usuario) {
+		Role role = new Role();
+		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		usuario.setEnabled(true);
 		servicio.save(usuario);
-		return "redirect:/configuracion";
+		role.setUser_id(usuario.getId());
+		role.setAuthority(usuario.getRol());
+		role.setId(null);
+		System.out.println("Aqui>>"+role.getId());
+		//service.save(role);
+		roleGuardar(role);
+		return "redirect:/listaUsuarios";
+	}
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/deleteuser/{id}")
+	public String eleminarUsuario(@PathVariable("id") Long id) {
+		servicio.delete(id);
+		return "redirect:/listaUsuarios";
+		
 	}
 	
 	/*@Secured("ROLE_ADMIN")

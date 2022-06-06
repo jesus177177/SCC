@@ -1,0 +1,5 @@
+package com.sistemacontrolclinico.web.app.controllers;
+
+public class RoleController {
+
+}

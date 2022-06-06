@@ -1,0 +1,5 @@
+package com.sistemacontrolclinico.web.app.models.dao;
+
+public interface IRoleDao {
+
+}
